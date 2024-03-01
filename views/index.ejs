@@ -1,0 +1,26 @@
+<%- include('partials/html-start.ejs') %>
+
+<h1>Welcome to Brody's Job App</h1>
+
+<p>
+    <%= jobData.length %>
+</p>
+
+//todo: display the contents of the jobData...not just the length. 
+
+<h3> add a new job </h3>
+
+<form method="POST" action="/addJob">
+    <label for="jobName">Job Name</label>
+    <input name="jobName" placeholder="new job name">
+    <input type="submit" value="add a new job" />
+</form>
+
+
+
+
+
+
+                
+
+<%- include('partials/html-end.ejs') %>
