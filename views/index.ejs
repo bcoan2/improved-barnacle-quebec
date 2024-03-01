@@ -1,6 +1,10 @@
 <%- include('partials/html-start.ejs') %>
 <link rel="stylesheet" href="/styles/styles.css">
-
+<style>
+  h1 {
+    text-align: center;
+  }
+</style>
 
 <h1>Welcome to Brody's Job App</h1>
 
@@ -13,7 +17,6 @@
   <div class="card m-8 bg-secondary text-white">
       <div class="card-body">
         <h3>Add a New Job </h3>
-
         <form method="POST" action="/addJob">
             <label for="jobName">Job Name</label>
             <input name="jobName" placeholder="new job name">
