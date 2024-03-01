@@ -1,9 +1,15 @@
 <%- include('partials/html-start.ejs') %>
+<link rel="stylesheet" href="/styles/styles.css">
+<style>
+    h1 {
+    text-align: center;
+  }
+</style>
 
 <h1>Welcome to Brody's Job App</h1>
 
 <p>
-   Current Jobs <%= jobData.length %>
+   Current Jobs: <%= jobData.length %>
 </p>
 
 //todo: display the contents of the jobData...not just the length. 

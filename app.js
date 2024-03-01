@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 let path = require('path');
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'))
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -59,7 +60,6 @@ app.get('/', async (req, res) =>  {
 app.post('/addJob', async (req, res) => {
 
   try {
-    // console.log("req.body: ", req.body) 
     client.connect; 
     const collection = client.db("quebec-database").collection("quebec-collection");
     
