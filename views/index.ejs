@@ -1,35 +1,87 @@
 <%- include('partials/html-start.ejs') %>
-<link rel="stylesheet" href="/styles/styles.css">
-<style>
-  h1 {
-    text-align: center;
-  }
-</style>
+  <link rel="stylesheet" href="/styles/styles.css">
 
-<h1>Welcome to Brody's Job App</h1>
 
-<p>
-   Current Jobs: <%= jobData.length %>
-</p>
+  <h1>Welcome to Brody's Job App</h1>
 
-//todo: display the contents of the jobData...not just the length. 
-<div class="col-md-3">
-  <div class="card m-8 bg-secondary text-white">
-      <div class="card-body">
-        <h3>Add a New Job </h3>
-        <form method="POST" action="/addJob">
-            <label for="jobName">Job Name</label>
-            <input name="jobName" placeholder="new job name">
-            <input type="submit" value="add a new job" />
-        </form>
+  <h2>
+    Current Jobs: <%= jobData.length %>
+  </h2>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col d-flex justify-content-center col-md-3">
+        <div class="card m-8 bg-secondary text-white">
+          <div class="card-body">
+            <h3>Add a New Job</h3>
+            <form method="POST" action="/addJob">
+              <input name="jobName" placeholder="New job name">
+              <input name="origin" placeholder="Job origin">
+              <input name="todo" placeholder="To-Do for the job">
+              <input type="submit" value="Add a new job" />
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col d-flex justify-content-center" class="col-md-3">
+        <div class="container-fluid">
+          <div class="card m-4 bg-secondary text-white">
+            <h4 class="card-title">Brody's Jobs</h4>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Job Name</th>
+                    <th scope="col">Origin</th>
+                    <th scope="col">To-Do</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var i=0; i < jobData.length; i++) { %>
+                    <tr>
+                      <td>
+                        <%= jobData[i].jobName %>
+                      </td>
+                      <td>
+                        <%= jobData[i].origin %>
+                      </td>
+                      <td>
+                        <%= jobData[i].todo %>
+                      </td>
+                      <td>
+                        <form method="POST" action="/deleteJob">
+                          <input type="hidden" name="devId" value="<%= jobData[i]._id %>">
+                          <button class="btn btn-danger" type="submit">Delete User</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+              </table>
+            </div>
+            </thead>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+
+  <div>
+  <footer class="mt-5 p-4 bg-dark text-white text-center">
+    <p>
+      <a href="https://github.com/bcoan2" class="card-link" target="github">|😀 My Github Profile 😀|</a>
+      <a href="https://codepen.io/bcoan2" class="card-link" target="codepen">|🚀 My Codepen Profile 🚀|</a>
+      <a href="https://www.codecademy.com/profiles/bcoan2" class="card-link" target="codecademy">|🎓 My Codecademy
+        Profile 🎓|</a>
+      <a href="https://www.linkedin.com/in/brody-coan-185925269/" class="card-link" target="linkedin">|💻 My LinkedIn
+        💻|</a>
+    </p>
+  </footer>
 </div>
 
-
-
-
-
-                
-
-<%- include('partials/html-end.ejs') %>
+  <%- include('partials/html-end.ejs') %>

@@ -2,10 +2,13 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5500;
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
 const bodyParser = require('body-parser')
 // set the view engine to ejs
 let path = require('path');
+
+
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'))
@@ -29,9 +32,9 @@ async function getJobData() {
     // await client.db("admin").command({ ping: 1 });
     const result = await client.db("quebec-database").collection("quebec-collection").find().toArray();
     console.log("mongo call await inside f/n: ", result);
-    return result; 
-  } 
-  catch(err) {
+    return result;
+  }
+  catch (err) {
     console.log("getJob() error: ", err);
   }
   finally {
@@ -41,106 +44,61 @@ async function getJobData() {
 }
 
 //reading from mongo
-app.get('/', async (req, res) =>  {
+app.get('/', async (req, res) => {
 
-  let result = await getJobData().catch(console.error); ; 
+  let result = await getJobData().catch(console.error);;
 
   console.log("getJobData() Result: ", result);
 
   res.render('index', {
-   
-    pageTitle: "brodys jobs", 
-    jobData: result 
 
+    pageTitle: "brodys jobs",
+    jobData: result
   });
-  
 });
 
 //create to mongo 
 app.post('/addJob', async (req, res) => {
-
   try {
-    client.connect; 
+    client.connect;
     const collection = client.db("quebec-database").collection("quebec-collection");
-    
     //draws from body parser 
     console.log(req.body);
-    
     await collection.insertOne(req.body);
-      
-
     res.redirect('/');
   }
-  catch(err){
+  catch (err) {
     console.log(err)
   }
-  finally{
-   // client.close()
+  finally {
+    // client.close()
   }
-
 })
 
-app.post('/updateJob/:id', async (req, res) => {
 
+// START OF TESTING
+app.post('/deleteJob', async (req, res) => {
   try {
-    console.log("req.parms.id: ", req.params.id) 
-    
-    client.connect; 
+    const devId = req.body.devId;
+    console.log("Received request to delete user with ID:", devId);
+
     const collection = client.db("quebec-database").collection("quebec-collection");
-    let result = await collection.findOneAndUpdate( 
-      {"_id": ObjectId(req.params.id)}, { $set: {"size": "REALLY BIG DRINK" } }
-    )
-    .then(result => {
-      console.log(result); 
-      res.redirect('/');
-    })
-    .catch(error => console.error(error))
+    const objectId = new ObjectId(devId);
+
+    const result = await collection.findOneAndDelete({ _id: objectId });
+
+    console.log("Result:", result);
+    res.redirect('/');
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error");
   }
-  finally{
-    //client.close()
-  }
+});
 
-})
 
-app.post('/deleteDrink/:id', async (req, res) => {
 
-  try {
-    console.log("req.parms.id: ", req.params.id) 
-    
-    client.connect; 
-    const collection = client.db("chillAppz").collection("drinkz");
-    let result = await collection.findOneAndDelete( 
-      {
-        "_id": ObjectId(req.params.id)
-      }
-    )
-    .then(result => {
-      console.log(result); 
-      res.redirect('/');
-    })
-    .catch(error => console.error(error))
-  }
-  finally{
-    //client.close()
-  }
-
-})
-
-app.get('/name', (req,res) => {
-
-  console.log("in get to slash name:", req.query.ejsFormName); 
-  myTypeServer = req.query.ejsFormName; 
-
-  res.render('index', {
-    myTypeClient: myTypeServer,
-    myResultClient: "myResultServer"
-
-  });
-
-  
-})
 
 
 app.listen(port, () => {
-console.log(`brodys job (quebec) app listening on port ${port}`)
+  console.log(`brodys job (quebec) app listening on port ${port}`)
 })
