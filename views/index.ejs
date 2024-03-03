@@ -8,7 +8,7 @@
     Current Jobs: <%= jobData.length %>
   </h2>
 
-
+<!-- Card to add job with origin and todo for the job -->
   <div class="container-fluid">
     <div class="row">
       <div class="col d-flex justify-content-center col-md-3">
@@ -16,6 +16,7 @@
           <div class="card-body">
             <h3>Add a New Job</h3>
             <form method="POST" action="/addJob">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <input name="jobName" placeholder="New job name">
               <input name="origin" placeholder="Job origin">
               <input name="todo" placeholder="To-Do for the job">
@@ -25,6 +26,7 @@
         </div>
       </div>
 
+      <!-- Card that displays the job and button to delete it -->
       <div class="col d-flex justify-content-center" class="col-md-3">
         <div class="container-fluid">
           <div class="card m-4 bg-secondary text-white">
@@ -54,6 +56,7 @@
                       <td>
                         <form method="POST" action="/deleteJob">
                           <input type="hidden" name="devId" value="<%= jobData[i]._id %>">
+                          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                           <button class="btn btn-danger" type="submit">Delete User</button>
                         </form>
                       </td>
@@ -71,11 +74,15 @@
   </div>
 
 
+  <!-- Ole Footer -->
   <div>
     <footer class="mt-5 p-4 bg-dark text-white text-center">
       <p>
+        <a href="https://gist.github.com/barrycumbie/978e0a8f517669733f61d44008e6924c" class="card-link"
+          target="quebec">|🏰 QUEBEC Lab 🏰|</a>
+        <a href="https://gist.github.com/barrycumbie/bbf76cb219a3e7579de1607d7e91fceb" class="card-link"
+          target="cis486">|🚀 CIS 486 🚀|</a>
         <a href="https://github.com/bcoan2" class="card-link" target="github">|😀 My Github Profile 😀|</a>
-        <a href="https://codepen.io/bcoan2" class="card-link" target="codepen">|🚀 My Codepen Profile 🚀|</a>
         <a href="https://www.codecademy.com/profiles/bcoan2" class="card-link" target="codecademy">|🎓 My Codecademy
           Profile 🎓|</a>
         <a href="https://www.linkedin.com/in/brody-coan-185925269/" class="card-link" target="linkedin">|💻 My LinkedIn

@@ -1,75 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 #titleBar {
-    background-image: url(https://cdn.pixabay.com/photo/2016/10/22/01/54/wood-1759566__340.jpg);
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-attachment:fixed;
-    margin: 0;
-    padding: 0;
-  }
-  
+  background-image: url(https://cdn.pixabay.com/photo/2016/10/22/01/54/wood-1759566__340.jpg);
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    width: 100%;
-    height: 100%;
-    background-image: url(https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg);  
-    background-size: cover;
-    background-attachment:fixed;
-    margin: 0;
-    padding: 0;
-    color: white;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-attachment:fixed;
-    margin: 0;
-    padding: 0;
-    font-family: 'VT323', monospace;
-  }
+  width: 100%;
+  height: 100%;
+  background-image: url(https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg);
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  color: white;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: 'VT323', monospace;
+}
 
-  h1 {
-    text-align: center;
-  }
+h1 {
+  text-align: center;
+}
 
-  h3 {
-    text-align: center;
-  }
+h3 {
+  text-align: center;
+}
 
-  form {
-    text-align: center;
-  }
-  .card{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+form {
+  text-align: center;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .info {
-    border-color: #2196F3;
-    color: dodgerblue
-    }
+  border-color: #2196F3;
+  color: dodgerblue
+}
 
 .bigger {
   font-family: "Roboto Slab", serif;
 
-  }
+}
 
 
- .maintxt > img,
-  .overlay-text {
-    position: absolute;
-    color: white;
-    font-weight: bold;
-    
-  }
+.maintxt>img,
+.overlay-text {
+  position: absolute;
+  color: white;
+  font-weight: bold;
 
-  footer {
-    position: fixed;
-    height: 100px;
-    background-color: red;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
+}
+
+footer {
+  position: fixed;
+  height: 100px;
+  background-color: red;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
 }
