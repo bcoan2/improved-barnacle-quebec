@@ -20,10 +20,4 @@ Delete a job by clicking the "Delete" button next to it.
 Author:
 Brody Coan
 
-Additional Links:
-QUEBEC Lab
-CIS 486
-Github Profile
-Codecademy Profile
-LinkedIn Profile
 Enjoy tracking your jobs with Brody's Job App! 🚀
