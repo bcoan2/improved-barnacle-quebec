@@ -2,11 +2,30 @@
   <link rel="stylesheet" href="/Styles/styles.css">
 
 
-  <h1>Welcome to Brody's Job App</h1>
 
-  <h2>
-    Current Jobs: <%= jobData.length %>
-  </h2>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <p class="navbar-brand ps-3"></p>
+  <h1 class="navbar-brand">Quebec Lab</h1>
+
+  <ul class="navbar-nav">
+      <li class="navitem"><a class="nav-link" href="https://gist.github.com/barrycumbie/978e0a8f517669733f61d44008e6924c" target="_blank">Quebec Story Card</a> </li>
+      <li class="navitem"><a class="nav-link" href="https://github.com/bcoan2/improved-barnacle-quebec" target="_blank">My Quebec Repo</a> </li>
+
+  </ul>
+
+</nav>
+
+<!-- Title bar -->
+<div class="row">
+  <div id="titleBar" class="col-md-8 offset-md-2">
+    <h1 style="color:white;"  class="text-center">Brody's Jobs App!</h1>
+    <div style="text-align: center;">
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Card to add job with origin and todo for the job -->
   <div class="container-fluid">
@@ -14,6 +33,9 @@
       <div class="col d-flex justify-content-center col-md-3">
         <div class="card m-8 bg-secondary text-white">
           <div class="card-body">
+            <h2>
+              Current Jobs: <%= jobData.length %>
+            </h2>
             <h3>Add a New Job</h3>
             <form method="POST" action="/addJob">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -42,18 +64,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for (var i=0; i < jobData.length; i++) { %>
+                  <% for (var i = 0; i < jobData.length; i++) { %>
                     <tr>
                       <td>
-                        <%= jobData[i].jobName %>
+                        <form id="updateForm<%= i %>" method="POST" action="/updateJob">
+                          <input type="hidden" name="devId" value="<%= jobData[i]._id %>">
+                          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                          <input type="text" name="jobName" value="<%= jobData[i].jobName %>">
                       </td>
                       <td>
-                        <%= jobData[i].origin %>
+                        <input type="text" name="origin" value="<%= jobData[i].origin %>">
                       </td>
                       <td>
-                        <%= jobData[i].todo %>
+                        <input type="text" name="todo" value="<%= jobData[i].todo %>">
                       </td>
                       <td>
+                          <button class="btn btn-primary" type="submit" form="updateForm<%= i %>">Update Job</button>
+                        </form>
                         <form method="POST" action="/deleteJob">
                           <input type="hidden" name="devId" value="<%= jobData[i]._id %>">
                           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -61,7 +88,7 @@
                         </form>
                       </td>
                     </tr>
-                    <% } %>
+                  <% } %>
                 </tbody>
               </table>
             </div>
@@ -78,8 +105,6 @@
   <div>
     <footer class="mt-5 p-4 bg-dark text-white text-center">
       <p>
-        <a href="https://gist.github.com/barrycumbie/978e0a8f517669733f61d44008e6924c" class="card-link"
-          target="quebec">|🏰 QUEBEC Lab 🏰|</a>
         <a href="https://gist.github.com/barrycumbie/bbf76cb219a3e7579de1607d7e91fceb" class="card-link"
           target="cis486">|🚀 CIS 486 🚀|</a>
         <a href="https://github.com/bcoan2" class="card-link" target="github">|😀 My Github Profile 😀|</a>

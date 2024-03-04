@@ -76,6 +76,56 @@ app.post('/addJob', async (req, res) => {
   }
 });
 
+// ... (your existing code)
+
+// update that job (render the update form)
+app.get('/updateJob', async (req, res) => {
+  try {
+    const devId = req.query.devId;
+    console.log('Received request to update job with ID:', devId);
+
+    const collection = client
+      .db('quebec-database')
+      .collection('quebec-collection');
+    const objectId = new ObjectId(devId);
+
+    const jobToUpdate = await collection.findOne({ _id: objectId });
+
+    res.render('update', {
+      pageTitle: 'Update Job',
+      jobData: jobToUpdate,
+      csrfToken: req.csrfToken(), // Include CSRF token in the render
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// handle the update job form submission
+app.post('/updateJob', async (req, res) => {
+  try {
+    const devId = req.body.devId;
+    console.log('Received request to update job with ID:', devId);
+
+    const collection = client
+      .db('quebec-database')
+      .collection('quebec-collection');
+    const objectId = new ObjectId(devId);
+
+    // Update the job with new data from the form
+    await collection.updateOne(
+      { _id: objectId },
+      { $set: { jobName: req.body.jobName, origin: req.body.origin, todo: req.body.todo } }
+    );
+
+    res.redirect('/');
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 // delete that job
 app.post('/deleteJob', async (req, res) => {
